@@ -18,7 +18,7 @@ class SemiGradientMountainCarAgent():
 		self.max_positions = []
 		self.wins = []
 		self.tile_hash = tiling.IHT(4096)
-		self.weights = [0.0 for _ in range(4096)]
+		self.weights = [0 for _ in range(4096)]
 		self.trace_vector = [0 for _ in range(4096)]
 		self.num_tilings = num_tilings
 		self.tiling_dimension = tiling_dimension
@@ -119,7 +119,7 @@ class SemiGradientMountainCarAgent():
 
 		for _ in range(self.episodes):	
 
-			reward= self.run_episode(_)
+			reward = self.run_episode(_)
 
 			self.rewards.append(reward)
 
@@ -175,7 +175,7 @@ def main():
 
 		while epsilon <= 0.8:
 
-			mc = SemiGradientMountainCarAgent(alpha, epsilon, gamma = 0.9, episodes = 1000)
+			mc = SemiGradientMountainCarAgent(alpha=alpha, epsilon=epsilon, gamma = 0.99, episodes = 1000)
 			mc.train()
 
 			wins = mc.get_winning_episodes()
@@ -217,5 +217,45 @@ def main():
 			epsilon += 0.2
 
 		alpha += 0.025
+
+	# mc = SemiGradientMountainCarAgent(alpha=0.0625, epsilon=0.5, gamma = 0.90, episodes = 1000)
+	# mc.train()
+	# alpha = 0.0625
+	# epsilon = 0.5
+	# wins = mc.get_winning_episodes()
+
+	# if(len(wins)>0):
+	# 	first_win = wins[0]
+
+	# mc.set_epsilon(0)
+	# mc.set_num_episodes(100)
+	# mc.train()
+
+	# final_positions = mc.get_final_positions()[:-100]
+	# rewards = mc.get_rewards()[:-100]
+	# max_positions = mc.get_max_positions()[:-100]
+
+	# trained_rewards = mc.get_rewards()[-100:]
+	# trained_final_positions = mc.get_final_positions()[-100:]
+	# trained_max_positions = mc.get_max_positions()[-100:]
+
+	# alpha_str_rep = str(alpha).replace(".", "")
+	# epsilon_str_rep = str(epsilon).replace(".", "")
+
+	# full_file_name = filename + str(alpha_str_rep) + "_" + str(epsilon_str_rep) + fileextension
+	# with open(full_file_name, mode="w") as file:
+	# 	writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+	# 	writer.writerow(["Episode", "TotalReward", "FinalPosition", "MaxPosition"])
+	# 	# if(first_win >= 0):
+	# 	# 	writer.writerow(["Episode of first win: " + str(first_win)])
+	# 	for i in range(len(rewards)):
+	# 		writer.writerow([i, rewards[i], final_positions[i], max_positions[i]])
+
+	# trained_file = trained + str(alpha_str_rep) + "_" + str(epsilon_str_rep) + fileextension
+	# with open(trained_file, mode="w") as file2:
+	# 	writer = csv.writer(file2, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+	# 	writer.writerow(["Episode", "Reward, FinalPosition", "MaxPosition"])
+	# 	for i in range(len(trained_rewards)):
+	# 		writer.writerow([i, trained_rewards[i], trained_final_positions[i],trained_max_positions[i]])
 
 main()

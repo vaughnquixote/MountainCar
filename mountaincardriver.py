@@ -4,6 +4,7 @@ import random
 import time
 import matplotlib.pyplot as plt
 import csv
+from tabular_mc import TabularMountainCarAgent
 
 
 def main():

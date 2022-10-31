@@ -4,4 +4,6 @@
 # Python stuff
 __pycache__/
 
+# collected data
+data/
 

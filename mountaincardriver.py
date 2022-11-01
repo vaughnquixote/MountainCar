@@ -23,7 +23,8 @@ def main():
 		epsilon = 0.25
 
 		while epsilon <= 1:
-
+            # train the agent across 5000 episodes with the given alpha 
+			# and epislon values and a gamma value of 0.9
 			mc = TabularMountainCarAgent(alpha, 0.9, epsilon, 5000)
 			mc.initialize_q_values()
 			mc.train()
